@@ -1,33 +1,32 @@
 class Solution {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
-         LinkedList<Integer> adj[]=new LinkedList[numCourses];
-        for(int i=0;i<numCourses;i++)
-            adj[i]=new LinkedList<>();
+    public boolean canFinish(int V, int[][] prerequisites) {
+       ArrayList<Integer> adj[]=new ArrayList[V];
+        for(int i=0;i<V;i++){
+            adj[i]=new ArrayList<>();
+        }
         
         for(int i=0;i<prerequisites.length;i++){
-            int u=prerequisites[i][0];
-            int v=prerequisites[i][1];
-            adj[v].add(u);
+            int fv=prerequisites[i][0];
+            int sv=prerequisites[i][1];
+            adj[sv].add(fv);
         }
-        boolean visited[]=new boolean[numCourses];
-        boolean visitedDFS[]=new boolean[numCourses];
-        for(int i=0;i<numCourses;i++){
-          if(!visited[i]){
-              if(Solve(adj,i,visited,visitedDFS))
-                return false;
-          }
+        boolean visited[]=new boolean[V];
+        boolean visitedDFS[]=new boolean[V];
+        for(int i=0;i<V;i++){
+            if(!visited[i]){
+                if(Solve(adj,visited,visitedDFS,i))return false;
+            }
         }
         return true;
     }
-    private static boolean Solve( LinkedList<Integer> adj[],int node,boolean visited[],boolean visitedDFS[]){
+    private boolean Solve(ArrayList<Integer> adj[],boolean visited[],boolean visitedDFS[],int node){
         visited[node]=true;
         visitedDFS[node]=true;
         
         for(Integer it:adj[node]){
             if(visited[it]==false){
-                if(Solve(adj,it,visited,visitedDFS))
-                    return true;
-               }
+                if(Solve(adj,visited,visitedDFS,it))return true;
+            }
             else if(visitedDFS[it]==true)
                 return true;
         }
