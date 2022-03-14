@@ -63,25 +63,30 @@ class Solution
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
         // add your code here
-        boolean visited[]=new boolean[V];
-        Stack<Integer> stack=new Stack<>();
+        int inorder[]=new int[V];
         for(int i=0;i<V;i++){
-            if(!visited[i]){
-                Solve(adj,i,visited,stack);
+            for(Integer it:adj.get(i)){
+                inorder[it]++;
             }
         }
-        int arr[]=new int[V];
+         Queue<Integer> queue=new LinkedList<>();
+        for(int i=0;i<V;i++){
+            if(inorder[i]==0){
+                queue.add(i);
+            }
+        }
+        int ans[]=new int[V];
         int index=0;
-        while(!stack.isEmpty()){arr[index++]=stack.pop();}
-        return arr;
-    }
-    private static void Solve(ArrayList<ArrayList<Integer>> adj,int node,boolean visited[],Stack<Integer> stack){
-        visited[node]=true;
-        for(Integer it:adj.get(node)){
-            if(!visited[it]){
-                Solve(adj,it,visited,stack);
+        while(!queue.isEmpty()){
+            int front = queue.poll();
+            ans[index++]=front;
+            for(Integer it:adj.get(front)){
+                inorder[it]--;
+                if(inorder[it]==0){
+                    queue.add(it);
+                }
             }
         }
-        stack.push(node);
+        return ans;
     }
 }
