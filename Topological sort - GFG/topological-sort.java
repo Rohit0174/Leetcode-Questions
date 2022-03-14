@@ -62,24 +62,25 @@ class Solution
     //Function to return list containing vertices in Topological order. 
     static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) 
     {
+        // add your code here
         boolean visited[]=new boolean[V];
         Stack<Integer> stack=new Stack<>();
         for(int i=0;i<V;i++){
-            if(!visited[i])
-            Solve(adj,stack,i,visited);
+            if(!visited[i]){
+                Solve(adj,i,visited,stack);
+            }
         }
-        int ans[]=new int[V];
+        int arr[]=new int[V];
         int index=0;
-        while(!stack.isEmpty()){
-            ans[index++]=stack.pop();
-        }
-        return ans;
+        while(!stack.isEmpty()){arr[index++]=stack.pop();}
+        return arr;
     }
-    private static void Solve(ArrayList<ArrayList<Integer>> adj,Stack<Integer> stack,int node,boolean visited[]){
+    private static void Solve(ArrayList<ArrayList<Integer>> adj,int node,boolean visited[],Stack<Integer> stack){
         visited[node]=true;
         for(Integer it:adj.get(node)){
-            if(!visited[it])
-            Solve(adj,stack,it,visited);
+            if(!visited[it]){
+                Solve(adj,it,visited,stack);
+            }
         }
         stack.push(node);
     }
