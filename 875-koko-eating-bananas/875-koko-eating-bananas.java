@@ -25,8 +25,6 @@ class Solution {
                 high=mid-1;
             }else if(sum>h){
                 low=mid+1;
-            }else{
-                high=mid-1;
             }
         }
         return ans;
