@@ -17,15 +17,6 @@ class Solution {
             grid=ans;
             k--;
     }
-     List<List<Integer>> result=new ArrayList<>();   
-        for(int i=0;i<grid.length;i++){
-            List<Integer> list=new ArrayList<>();
-            for(int j=0;j<grid[0].length;j++){
-                list.add(grid[i][j]);
-            }
-            result.add(list);
-        }
-        
-        return result;
+    return (List)Arrays.asList(grid);
     }
 }
