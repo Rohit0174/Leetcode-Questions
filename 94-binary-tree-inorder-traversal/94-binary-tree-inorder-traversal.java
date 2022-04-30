@@ -20,9 +20,8 @@ class Solution {
         return list;
     }
     private void Solve(TreeNode root,List<Integer> list){
-        if(root==null){
+        if(root==null)
             return ;
-        }
         Solve(root.left,list);
         list.add(root.val);
         Solve(root.right,list);
