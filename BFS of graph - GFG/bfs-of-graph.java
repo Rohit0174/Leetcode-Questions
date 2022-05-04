@@ -43,12 +43,13 @@ class Solution {
         //visited[0] = true;
         while(!queue.isEmpty()){
             int front = queue.poll();
+            if(visited[front]==true)continue;
             list.add(front);
             visited[front] = true;
             for(Integer it:adj.get(front)){
                 if(!visited[it])
                 {
-                    visited[it] = true;
+                   // visited[it] = true;
                     queue.add(it);
                     
                 }
